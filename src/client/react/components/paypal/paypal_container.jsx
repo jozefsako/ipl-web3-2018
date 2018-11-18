@@ -1,20 +1,35 @@
 import React from 'react';
-var paypal = require('paypal-rest-sdk');
+import PaypalComponent from './paypal_component';
+import sendApiRequest from "react/utils/api";
 
 class PaypalContainer extends React.Component {
-  state = {};
+  constructor(props){
+    super(props);
 
+  this.state = {
+    amount: "0",
+    
+};
+  this.onFieldChange = this.onFieldChange.bind(this);
+  }
+  onFieldChange(event){
+    this.setState({
+        [event.target.name]: event.target.value,
+    })
+}  
+donate(amount){
+  const url = "/api/paypal";
+  console.log(amount);
+  sendApiRequest({ url, method:'POST', params:{amout:amount, description:"Donation" }})
+    .then((message) => {
+    })
+    .catch((error) => {
+      console.error(error);
+    })
 
-
-  componentDidMount() {
-    //console.log('je rentre ici 1');
-   
-
-}
-
+  }
   render() {
-    return <h1>Testing paypal container page</h1>;
+    return <PaypalComponent donate={this.donate} amount={this.state.amount} onFieldChange={this.onFieldChange}></PaypalComponent>
   }
 }
-
 export default PaypalContainer;

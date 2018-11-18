@@ -21,7 +21,7 @@ function RouterOutlet() {
       <Route path="/message/:id" component={MessageContainer} />
       <Route path="/login" component={LoginContainer} />
       <Route path="/stripe" component={StripeContainer} />
-      <Route path="/paypal" component={PaypalContainer} />
+      <Route path="/paypal/" component={PaypalContainer} />
     </React.Fragment>
   );
 }

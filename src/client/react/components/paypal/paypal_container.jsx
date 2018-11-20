@@ -5,13 +5,14 @@ import sendApiRequest from "react/utils/api";
 class PaypalContainer extends React.Component {
   constructor(props){
     super(props);
-
-  this.state = {
+    this.state = {
     amount: "0",
-    
+    url:"",
 };
   this.onFieldChange = this.onFieldChange.bind(this);
+  this.donate = this.donate.bind(this);
   }
+
   onFieldChange(event){
     this.setState({
         [event.target.name]: event.target.value,
@@ -19,17 +20,21 @@ class PaypalContainer extends React.Component {
 }  
 donate(amount){
   const url = "/api/paypal";
-  console.log(amount);
-  sendApiRequest({ url, method:'POST', params:{amout:amount, description:"Donation" }})
-    .then((message) => {
+  
+  sendApiRequest({ url, method:'GET'})
+  .then((response) => {
+    console.log(response.url);
+    this.setState({
+      url: response.url,
     })
+  })
     .catch((error) => {
       console.error(error);
     })
-
+    
   }
   render() {
-    return <PaypalComponent donate={this.donate} amount={this.state.amount} onFieldChange={this.onFieldChange}></PaypalComponent>
+    return <PaypalComponent donate={this.donate} url={this.state.url} amount={this.state.amount} onFieldChange={this.onFieldChange}></PaypalComponent>
   }
 }
 export default PaypalContainer;

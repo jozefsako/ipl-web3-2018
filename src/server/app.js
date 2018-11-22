@@ -13,7 +13,7 @@ const db = require('./modules/db.js');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const messagesRouter = require('./routes/messages');
-const paypalRouter = require('./routes/connect2paypal');
+const paypalRouter = require('./routes/paypal');
 
 const projectRoot = path.join(__dirname, '../..');
 const serverRoot = path.join(__dirname, '.');

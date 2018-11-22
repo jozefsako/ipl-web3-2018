@@ -1,40 +1,52 @@
-import React from 'react';
+import React from "react";
+
+import { Redirect } from 'react-router-dom';
 import PaypalComponent from './paypal_component';
-import sendApiRequest from "react/utils/api";
+import "./paypal_style.scss";
+import sendApiRequest from 'react/utils/api';
 
 class PaypalContainer extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-    amount: "0",
-    url:"",
-};
-  this.onFieldChange = this.onFieldChange.bind(this);
-  this.donate = this.donate.bind(this);
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            flex : false,
+            url: "",
+        };
+        this.pay = this.pay.bind(this);
+    }
 
-  onFieldChange(event){
-    this.setState({
-        [event.target.name]: event.target.value,
-    })
-}  
-donate(amount){
-  const url = "/api/paypal";
-  
-  sendApiRequest({ url, method:'GET'})
-  .then((response) => {
-    console.log(response.url);
-    this.setState({
-      url: response.url,
-    })
-  })
-    .catch((error) => {
-      console.error(error);
-    })
+    pay(amount) {
+        console.log("1) pay() : montant --->  " + amount);
+        const url = `/api/paypal/pay`;
+        
+        var json_amount = { "amount" : amount };
     
-  }
-  render() {
-    return <PaypalComponent donate={this.donate} url={this.state.url} amount={this.state.amount} onFieldChange={this.onFieldChange}></PaypalComponent>
-  }
+        sendApiRequest({
+            url,
+            method: "post",
+            params : json_amount
+        }).then((resp) => {
+
+            this.setState({ url: resp.url });
+            console.log("2) pay() : resp ---> " + resp.url);
+            
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    render() {
+        console.log("3) pay() : url ----> " + this.state.url);
+        if (this.state.url === ""){
+        }else{
+            window.location = this.state.url;
+        }
+        return (
+            <React.Fragment>
+                <PaypalComponent pay={this.pay} ></PaypalComponent>
+            </React.Fragment>
+        )
+    }
 }
+
 export default PaypalContainer;

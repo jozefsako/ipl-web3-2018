@@ -20,7 +20,7 @@ function sendApiRequest({ url, method = "GET", params = null }) {
   return fetch(url, {
     method: method,
     headers: headers,
-    mode:'no-cors',
+    // mode:'no-cors',
     body: params && JSON.stringify(params)
   }).then(handleResponse);
 }

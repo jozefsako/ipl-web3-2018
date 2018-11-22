@@ -1,42 +1,54 @@
 import React from 'react';
-import {  Form, Jumbotron, Button, ButtonToolbar} from 'react-bootstrap';
+import {
+    Container,
+    Row,
+    Col,
+    Form,
+    Button,
+} from 'react-bootstrap';
 
-
-const PaypalComponent = ({donate,amount, onFieldChange, url}) => {
-    //TODO have to pass the amount onto donate method
-    
+const PaypalComponent = ({
+    pay, amount, felx,
+}) => {
 
     return (
-        <div>
-    <Jumbotron>
-        <h2>Donate Money</h2>
-        <Form >
-            <Form.Group>
-                <Form.Label column sm={2}>
-                Amout
-                </Form.Label>
-                <Form.Control name="amount" type="number" value={amount} onChange={onFieldChange} placeholder="Amount"/>
-             </Form.Group>
-            <ButtonToolbar>
-          <Button variant="outline-primary" onClick={() => donate(amount)}>
-           Donate
-          </Button>
-        </ButtonToolbar>
-            </Form>
-        
-    </Jumbotron>
-    <iframe id="inlineFrameExample"
-    title="Inline Frame Example"
-    width="300"
-    height="200"
-    
-    src={url}>
-</iframe>
-</div>
+        <Container>
 
+            <Row>
+                <Col style={{ marginTop: "200px" }}>
+                    <Form onSubmit={pay}>
+                        <Form.Group as={Row}>
+                            <div className="container theme-background-white main-body">
+                                <div className="col-md-12">
 
+                                    <div className="row donate-bar">
 
-    )
-}
- 
+                                        <div className="col-md-4 theme-blue">
+                                            GIVE WHERE NEEDED MOST
+                                        </div>
+
+                                        <div style={{ marginTop: "auto", marginBottom: "auto" }} className="col-md-8">
+                                            <Button className="btn-blue" style={{ marginLeft: "0.5%", marginRight: "0.5%" }} onClick={() => amount = "25"}>$25</Button>
+                                            <Button className="btn-blue" style={{ marginLeft: "0.5%", marginRight: "0.5%" }} onClick={() => amount = "50"}>$50</Button>
+                                            <Button className="btn-blue" style={{ marginLeft: "0.5%", marginRight: "0.5%" }} onClick={() => amount = "100"}>$100</Button>
+                                            <Button className="btn-blue" style={{ marginLeft: "0.5%", marginRight: "0.5%" }} onClick={() => amount = "500"}>$500</Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Form.Group>
+
+                        <Form.Group as={Row}>
+                            <Col>
+                                <Button onClick={() => pay(amount)} className="btn-blue">Payer</Button>
+                            </Col>
+                        </Form.Group>
+
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
+    );
+};
+
 export default PaypalComponent;

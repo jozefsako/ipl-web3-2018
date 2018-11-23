@@ -8,6 +8,7 @@ class MessagesContainer extends React.Component {
     this.state = { messages: [] };
 
     this.deleteMessage = this.deleteMessage.bind(this);
+    console.log("messagesss");
   }
 
 

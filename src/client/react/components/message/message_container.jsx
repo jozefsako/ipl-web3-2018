@@ -9,6 +9,7 @@ class MessageContainer extends React.Component {
       id: props.match.params.id,
       message: null, 
     };
+    console.log("message");
   }
 
 

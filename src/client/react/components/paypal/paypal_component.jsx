@@ -25,13 +25,7 @@ const PaypalComponent = ({donate,amount, onFieldChange, url}) => {
             </Form>
         
     </Jumbotron>
-    <iframe id="inlineFrameExample"
-    title="Inline Frame Example"
-    width="300"
-    height="200"
     
-    src={url}>
-</iframe>
 </div>
 
 

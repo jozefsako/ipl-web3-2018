@@ -31,9 +31,18 @@ donate(amount){
     .catch((error) => {
       console.error(error);
     })
-    
+    //console.log(this.state.url);
+    //window.location = this.state.url;  
+  }
+  componentDidMount(props){
+    console.log(this.props);
   }
   render() {
+    if(this.state.url===""){
+    }
+      else{
+        window.location = this.state.url;  
+      }
     return <PaypalComponent donate={this.donate} url={this.state.url} amount={this.state.amount} onFieldChange={this.onFieldChange}></PaypalComponent>
   }
 }

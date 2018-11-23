@@ -3,6 +3,11 @@ var router = express.Router();
 const db = require('../modules/db.js');
 var paypal = require('paypal-rest-sdk');
 
+router.get('/accepted', function(req, res, next) {
+    console.log(JSON.stringify(req.params));
+    res.redirect(301, "http://localhost:3030/#/paypal");
+})
+
 router.get('/', function(req, res, next) {
     
     paypal.configure({
@@ -19,8 +24,8 @@ router.get('/', function(req, res, next) {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://google.com",
-                "cancel_url": "http://localhost:3030/api/paypal/accepted"
+                "return_url": "http://localhost:3030/#/paypal/",
+                "cancel_url": "http://localhost:3030/api/paypal/cancelled"
             },/*
             "transactions": [{
                 "item_list": {
@@ -72,7 +77,7 @@ router.get('/', function(req, res, next) {
                
                var data='{"url" : "'+approvUrl+'"}';
                var myObj = JSON.parse(data);
-               
+
               res.status(200).json(myObj);
                
             }

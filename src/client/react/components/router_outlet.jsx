@@ -10,6 +10,7 @@ import MessageContainer from "./message/message_container";
 import LoginContainer from "./login/login_container";
 import StripeContainer from "./stripe/stripe_container";
 import PaypalContainer from "./paypal/paypal_container";
+import PaypalSuccessContainer from "./paypal_success/paypal_success_container";
 
 function RouterOutlet() {
   return (
@@ -22,6 +23,7 @@ function RouterOutlet() {
       <Route path="/login" component={LoginContainer} />
       <Route path="/stripe" component={StripeContainer} />
       <Route path="/paypal/" component={PaypalContainer} />
+      <Route path="/paypal/success" component={PaypalSuccessContainer} />
     </React.Fragment>
   );
 }

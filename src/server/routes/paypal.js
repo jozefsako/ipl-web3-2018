@@ -22,8 +22,8 @@ router.post('/pay', (req, res) => {
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url": "http://localhost:3030/#/paypal",
-            "cancel_url": "http://localhost:3030/#/cancel"
+            "return_url": "http://localhost:3030/api/paypal/success",
+            "cancel_url": "http://localhost:3030/api/paypal/cancel"
         },
         "transactions": [{
             "item_list": {
@@ -51,7 +51,7 @@ router.post('/pay', (req, res) => {
             for (let i = 0; i < payment.links.length; i++) {
                 if (payment.links[i].rel === "approval_url") {
                     console.log("---> je suis la 4");
-                    var json = '{"url":"'+payment.links[i].href+'"}';
+                    var json = '{"url":"' + payment.links[i].href + '"}';
                     console.log(json);
                     res.send(JSON.parse(json));
                 }
@@ -60,5 +60,29 @@ router.post('/pay', (req, res) => {
     });
     console.log("---> je suis la 5");
 });
+
+router.get('/success', (req, res) => {
+
+    const payerId = req.query.PayerID;
+    const paymentId = req.query.paymentId;
+
+    var execute_payment_json = {
+        "payer_id": payerId
+    }
+
+    paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+        if (error) {
+            console.log(error.response);
+            throw error;
+        } else {
+            console.log("Get Payment Response");
+            console.log(JSON.stringify(payment));
+            res.redirect(301, "http://localhost:3030/#/paypal/success");
+        }
+    })
+
+});
+
+router.get('/cancel', (req, res) => res.send(301, "http://localhost:3030/#/paypal/cancel"));
 
 module.exports = router;

@@ -8,10 +8,11 @@ import {
 } from 'react-bootstrap';
 
 const PaypalComponent = ({
-    pay, amount, felx,
+    pay, amount, 
 }) => {
 
     return (
+
         <Container>
 
             <Row>

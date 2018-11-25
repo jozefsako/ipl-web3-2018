@@ -4,23 +4,18 @@ import { Redirect } from 'react-router-dom';
 import PaypalComponent from './paypal_component';
 import "./paypal_style.scss";
 import sendApiRequest from 'react/utils/api';
-import { isUndefined } from "util";
 
 class PaypalContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            flex: false,
             url: "",
         };
         this.pay = this.pay.bind(this);
 
         console.log(" PROPS ----> ");
         console.log(this.props.location);
-
-        for(var pos=0; pos < 3; pos++){
-            console.log(this.props[pos]);
-        }
+        
     }
 
     pay(amount) {

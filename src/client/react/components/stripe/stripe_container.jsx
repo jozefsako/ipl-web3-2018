@@ -7,7 +7,7 @@ class StripeContainer extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      amount: "1000",
+      amount: "",
 
     };
     this.onFieldChange = this.onFieldChange.bind(this);
@@ -21,8 +21,8 @@ class StripeContainer extends React.Component {
     })
   }
 
-  donate(amount){
-    
+  donate(e,amount){
+    e.preventDefault();
     this.props.stripe.createToken({name: "Name"})
     .then((result) => {
       
@@ -59,6 +59,8 @@ class StripeContainer extends React.Component {
     return(
       <StripeComponent
         donate = {this.donate}
+        onFieldChange = {this.onFieldChange}
+        amount = {this.state.amount}
       />
       
     )}

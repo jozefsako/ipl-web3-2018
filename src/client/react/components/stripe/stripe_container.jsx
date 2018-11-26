@@ -3,12 +3,13 @@ import StripeComponent from './stripe_component';
 import sendApiRequest from "react/utils/api";
 import {CardElement, injectStripe} from 'react-stripe-elements';
 
+
 class StripeContainer extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       amount: "",
-
+      donated:false,
     };
     this.onFieldChange = this.onFieldChange.bind(this);
     this.donate = this.donate.bind(this);
@@ -46,7 +47,9 @@ class StripeContainer extends React.Component {
       const url = `/api/stripe/`;
     sendApiRequest({ url, method:"POST", params:obj})
       .then((response) => {
-       
+        this.setState({
+          donated:true
+        })
       })
       .catch((error) => {
         console.error(error);
@@ -56,14 +59,22 @@ class StripeContainer extends React.Component {
     
   
   render() {
-    return(
-      <StripeComponent
-        donate = {this.donate}
-        onFieldChange = {this.onFieldChange}
-        amount = {this.state.amount}
-      />
-      
-    )}
+    if(this.state.donated){
+      return(
+        <alert>Thank you </alert>
+      )
+    }
+    else{
+      return(
+        <StripeComponent
+          donate = {this.donate}
+          onFieldChange = {this.onFieldChange}
+          amount = {this.state.amount}
+        />
+        
+      )
+    }
+  }  
   
 }
   export default injectStripe(StripeContainer);

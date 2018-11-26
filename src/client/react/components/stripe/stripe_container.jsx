@@ -7,10 +7,8 @@ class StripeContainer extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      amount: "11",
-      cardNumber:"",
-      ccv:"",
-      expiration:""
+      amount: "1000",
+
     };
     this.onFieldChange = this.onFieldChange.bind(this);
     this.donate = this.donate.bind(this);
@@ -25,7 +23,6 @@ class StripeContainer extends React.Component {
 
   donate(amount){
     
-
     this.props.stripe.createToken({name: "Name"})
     .then((result) => {
       

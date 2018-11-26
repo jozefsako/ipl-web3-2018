@@ -12,7 +12,7 @@ router.post('/', function(req, res, next) {
       .create({
         amount: req.body.amount, // Unit: cents
         currency: 'eur',
-        source: req.body.tokenId,
+        source: req.body.tokenID,
         description: 'Test payment',
       })
       .then(result => res.status(200).json(result))

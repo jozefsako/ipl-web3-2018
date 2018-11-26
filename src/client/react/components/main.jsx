@@ -12,7 +12,7 @@ function Main() {
     <HashRouter>
       <AuthenticationProvider>
         <ThemeProvider>
-        <StripeProvider apiKey="pk_test_YLLasAftx4BAOY6OIaMRHPtl">
+        <StripeProvider apiKey="pk_test_4SHSYWC8DSzI5MIEdsyvUilX">
           <div className="example">
             <Elements>
               <Layout />

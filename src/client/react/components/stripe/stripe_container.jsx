@@ -14,6 +14,7 @@ class StripeContainer extends React.Component {
     };
     this.onFieldChange = this.onFieldChange.bind(this);
     this.donate = this.donate.bind(this);
+    this.sendToken2BackEnd = this.sendToken2BackEnd.bind(this);
   }
 
   onFieldChange(event){
@@ -24,22 +25,39 @@ class StripeContainer extends React.Component {
 
   donate(amount){
     
-    const token =  this.props.stripe.createToken({name: "Name"});
-    console.log(token);
-    const url = `/api/stripe/doPayment/`;
-    sendApiRequest({ url, method:"POST", params : token})
+
+    this.props.stripe.createToken({name: "Name"})
+    .then((result) => {
+      
+      if(result.token){
+        //token successfully created
+        //console.log(result.token.id);
+        this.sendToken2BackEnd(result.token.id, this.state.amount);
+      }
+      else{
+        //token not created
+      }
+    });
+    
+  }
+    sendToken2BackEnd(stripetok, amount){
+      var  obj = {
+        "tokenID" : stripetok, 
+          "amount" : amount
+      }
+      
+      const url = `/api/stripe/`;
+    sendApiRequest({ url, method:"POST", params:obj})
       .then((response) => {
-        this.setState({
-          
-        })
+       
       })
       .catch((error) => {
         console.error(error);
-        this.setState({
-          
-        })
+        
       })
-  }
+    }
+    
+  
   render() {
     return(
       <StripeComponent

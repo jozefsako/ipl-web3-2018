@@ -13,6 +13,7 @@ import PaypalSuccessContainer from "./paypal_success/paypal_success_container";
 import PaypalCancelContainer from "./paypal_cancel/paypal_cancel_container";
 import TransactionsContainer from "./transactions/transactions_container";
 import TransactionContainer from "./transaction/transaction_container";
+import StripeContainer from "./stripe/stripe_container";
 
 function RouterOutlet() {
   return (
@@ -23,6 +24,7 @@ function RouterOutlet() {
       <Route path="/messages" component={MessagesContainer} />
       <Route path="/message/:id" component={MessageContainer} />
       <Route path="/login" component={LoginContainer} />
+      <Route path="/stripe/" component={StripeContainer} />
       <Route path="/paypal/" component={PaypalContainer} />
       <Route path="/paypal/success" component={PaypalSuccessContainer} />
       <Route path="/paypal/cancel" component={PaypalCancelContainer} />

@@ -17,6 +17,7 @@ function sendApiRequest({ url, method = "GET", params = null }) {
   }
   console.log(url, method);
 
+
   return fetch(url, {
     method: method,
     headers: headers,

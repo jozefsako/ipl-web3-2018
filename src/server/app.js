@@ -15,6 +15,7 @@ const usersRouter = require('./routes/users');
 const messagesRouter = require('./routes/messages');
 const paypalRouter = require('./routes/paypal');
 const transactionsRouter = require('./routes/transactions');
+const stripeRouter = require('./routes/stripe');
 
 const projectRoot = path.join(__dirname, '../..');
 const serverRoot = path.join(__dirname, '.');
@@ -63,6 +64,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/messages', messagesRouter);
 app.use('/api/paypal', paypalRouter);
 app.use('/api/transactions', transactionsRouter);
+app.use('/api/stripe', stripeRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -6,28 +6,24 @@ import {
     Form,
 } from 'react-bootstrap';
 
-const PaypalSuccessComponent = ({
+const PaypalCancelComponent = ({
 
 }) => {
 
     return (
+
         <Container>
 
             <Row>
-                <Col style={{ marginTop: "50px" }}>
-                    <Form>
+                <Col style={{ marginTop: "200px" }}>
+                    <Form >
                         <Form.Group as={Row}>
                             <div className="container theme-background-white main-body">
                                 <div className="col-md-12">
-
-                                    <div className="col-md-12 theme-blue">
-                                        <h2>Thank you for your donation ! </h2>
-                                    </div>
-
+                                    <h2>There was an error processing your payment</h2>
                                 </div>
                             </div>
                         </Form.Group>
-
                     </Form>
                 </Col>
             </Row>
@@ -35,4 +31,4 @@ const PaypalSuccessComponent = ({
     );
 };
 
-export default PaypalSuccessComponent;
+export default PaypalCancelComponent;

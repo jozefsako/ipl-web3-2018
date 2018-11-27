@@ -31,6 +31,9 @@ const Navigation = ({ logout, theme }) => {
         <Nav.Link as={Link} to="/paypal">
           Paypal
         </Nav.Link>
+        <Nav.Link as={Link} to="/transactions">
+          Transactions
+        </Nav.Link>
       </Nav>
       <SearchForm />
       <Button variant="outline-warning" onClick={logout}>

@@ -5,8 +5,6 @@ const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const assert = require('assert');
 
-
-
 /**
  * Variables
  */
@@ -14,8 +12,6 @@ const assert = require('assert');
 const url = process.env.DB_URL;
 // Database Name
 const dbName = process.env.DB_DB;
-
-
 
 /**
  * Connect to the database
@@ -35,8 +31,6 @@ let connect = () => {
         });
     });
 };
-
-
 
 /**
  * Exports

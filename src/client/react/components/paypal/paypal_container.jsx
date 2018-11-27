@@ -12,16 +12,11 @@ class PaypalContainer extends React.Component {
             url: "",
         };
         this.pay = this.pay.bind(this);
-
-        console.log(" PROPS ----> ");
-        console.log(this.props.location);
-        
     }
 
     pay(amount) {
-        console.log("1) pay() : montant --->  " + amount);
-        const url = `/api/paypal/pay`;
 
+        const url = `/api/paypal/pay`;
         var json_amount = { "amount": amount };
 
         sendApiRequest({
@@ -29,21 +24,20 @@ class PaypalContainer extends React.Component {
             method: "post",
             params: json_amount
         }).then((resp) => {
-
             this.setState({ url: resp.url });
-            console.log("2) pay() : resp ---> " + resp.url);
-
         }).catch((err) => {
             console.log(err);
         })
+
     }
 
     render() {
-        console.log("3) pay() : url ----> " + this.state.url);
         if (this.state.url === "") {
+
         } else {
             window.location = this.state.url;
         }
+
         return (
             <React.Fragment>
                 <PaypalComponent pay={this.pay} ></PaypalComponent>

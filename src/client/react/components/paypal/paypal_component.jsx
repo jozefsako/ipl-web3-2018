@@ -5,16 +5,16 @@ import {
     Col,
     Form,
     Button,
+    Jumbotron,
 } from 'react-bootstrap';
+import { CircleLoader } from "react-spinners";
 
 const PaypalComponent = ({
-    pay, amount, 
+    pay, amount,
 }) => {
 
     return (
-
         <Container>
-
             <Row>
                 <Col style={{ marginTop: "200px" }}>
                     <Form onSubmit={pay}>
@@ -41,7 +41,7 @@ const PaypalComponent = ({
 
                         <Form.Group as={Row}>
                             <Col>
-                                <Button onClick={() => pay(amount)} className="btn-blue">Payer</Button>
+                                <Button id="btn_pay" onClick={() => pay(amount) } className="btn-blue">Payer</Button>
                             </Col>
                         </Form.Group>
 

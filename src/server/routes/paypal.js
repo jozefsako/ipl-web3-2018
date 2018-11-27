@@ -1,20 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var paypal = require('paypal-rest-sdk');
+const db = require('../modules/db.js');
 
 router.post('/pay', (req, res) => {
-
-    console.log("---> 1) router paypal");
 
     paypal.configure({
         'mode': 'sandbox', //sandbox or live
         'client_id': 'AR04aVW-BvgAKmhpALlDlFwbloxnJh2KDww7fNsnK1aAh7mm65j-0_yF0N7a1nEsS7EUMBlrCBjjKpeh',
         'client_secret': 'ELQQyXa-Kg5AbIhq0QjjQgxXPcQv27SJlDvkjl9C7-B3eLfG31OT9ZfCs416-WJvZqQPgbdtkf3cjE_9'
     });
-
-    console.log("-----> 2) router paypal");
-    console.log(req.body);
-
 
     const create_payment_json = {
         "intent": "sale",
@@ -43,14 +38,12 @@ router.post('/pay', (req, res) => {
         }]
     };
 
-    console.log("---> je suis la 3");
     paypal.payment.create(create_payment_json, function (error, payment) {
         if (error) {
             throw error;
         } else {
             for (let i = 0; i < payment.links.length; i++) {
                 if (payment.links[i].rel === "approval_url") {
-                    console.log("---> je suis la 4");
                     var json = '{"url":"' + payment.links[i].href + '"}';
                     console.log(json);
                     res.send(JSON.parse(json));
@@ -58,7 +51,6 @@ router.post('/pay', (req, res) => {
             }
         }
     });
-    console.log("---> je suis la 5");
 });
 
 router.get('/success', (req, res) => {
@@ -77,10 +69,15 @@ router.get('/success', (req, res) => {
         } else {
             console.log("Get Payment Response");
             console.log(JSON.stringify(payment));
+
+            db.db.collection('transactions').insertOne(payment,  function(err, res) {
+                if (err) throw err;
+                console.log("1 document inserted");
+            });
+
             res.redirect(301, "http://localhost:3030/#/paypal/success");
         }
-    })
-
+    });
 });
 
 router.get('/cancel', (req, res) => res.send(301, "http://localhost:3030/#/paypal/cancel"));
